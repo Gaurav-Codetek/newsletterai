@@ -29,6 +29,8 @@ collection = database[col]
 origins = [
     "http://localhost:3000",
     "http://localhost:3001",
+    "https://techblog.saeuietpu.in",
+    "https://newsletter-ai.saeuietpu.in"
     "https://radiant-tiramisu-db92c5.netlify.app"# Replace with your actual frontend domain
 ]
 
