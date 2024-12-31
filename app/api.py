@@ -176,4 +176,4 @@ async def send_email(request: emailParams,x_api_key: str = Header(...)):
 
 @app.get("/")
 async def root():
-    return "Server working fine!"
+    return "Server working fine!!"
