@@ -173,3 +173,7 @@ async def send_email(request: emailParams,x_api_key: str = Header(...)):
     for doc in emails:
         send_email_with_alias(doc, request.link, request.title, request.des)
     return {"status":"Email sent successfully", "data": result[0]['email']}
+
+@app.get("/")
+async def root():
+    return "Server working fine!"
