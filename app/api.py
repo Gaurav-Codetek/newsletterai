@@ -53,6 +53,8 @@ class emailParams(BaseModel):
     des: str
     subs: str
 
+class addSub(BaseModel):
+    submail: str
 def scrape_paragraph_content(url):
     try:
         # Send an HTTP GET request to the URL
@@ -173,6 +175,14 @@ async def send_email(request: emailParams,x_api_key: str = Header(...)):
     for doc in emails:
         send_email_with_alias(doc, request.link, request.title, request.des)
     return {"status":"Email sent successfully", "data": result[0]['email']}
+
+@app.post("/addSub")
+async def add_sub(request: addSub, x_api_key: str = Header(...)):
+    verify_api_key(x_api_key)
+    data = list(database["subscribers"].find({}, {"_id":0}))
+    data[0]["email"].append(f'{request.submail}')
+    database["subscribers"].update_one({}, {"$set":{"email": data[0]["email"]}})
+    return {"status_code":200, "data": data}
 
 @app.get("/")
 async def root():
