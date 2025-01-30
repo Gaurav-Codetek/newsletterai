@@ -30,7 +30,8 @@ origins = [
     "http://localhost:3000",
     "http://localhost:3001",
     "https://techblog.saeuietpu.in",
-    "https://newsletter-ai.saeuietpu.in"
+    "https://newsletter-ai.saeuietpu.in",
+    "https://saeuietpu.in"
 ]
 
 app.add_middleware(
