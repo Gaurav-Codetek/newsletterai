@@ -54,6 +54,10 @@ class emailParams(BaseModel):
     des: str
     subs: str
 
+class addFeedback(BaseModel):
+    username: str
+    email: str
+    message: str
 class addSub(BaseModel):
     submail: str
 def scrape_paragraph_content(url):
@@ -83,7 +87,7 @@ SMTP_SERVER = "smtp.gmail.com"  # GoDaddy Professional Email (Microsoft 365)
 SMTP_PORT = 587
 PRIMARY_EMAIL = os.getenv("PRIMARY_EMAIL")  # e.g., admin@saeuietpu.in
 EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD")  # Password for admin@saeuietpu.in
-ALIAS_EMAIL = "newsletter@saeuietpu.in"
+ALIAS_EMAIL = "feedback@saeuietpu.in"
 
 
 def send_email_with_alias(receiver_email, link, title, des):
@@ -127,6 +131,50 @@ def send_email_with_alias(receiver_email, link, title, des):
         server.quit()
 
         print(f"Email sent successfully to {receiver_email} from {ALIAS_EMAIL}")
+    except Exception as e:
+        print(f"Error sending email: {e}")
+
+def send_feedback_mail(receiver_name, message):
+    try:
+            # Email Content
+            subject = "Feedback from SAE"
+            html_body = f"""
+            <html>
+                <body>
+                <div style="text-align:center; width:100%; display:flex; justify-content:center">
+                    <div style="width:100%;text-align:center; align-items:center">
+                        <h2 style="text-align:center; font-weight:600;">SAE UIET PU Feedback</h2>
+                        <p></p>
+                        <br>
+                        <h3>{receiver_name}</h3>
+                        <p>{message}</p>
+                        <br>
+                        <p style="font-size:12px;color:gray;">If you did not subscribe, please ignore this email.</p>
+                    </div>
+                </div>
+                </body>
+            </html>
+            """
+
+            # Set up the email message
+            message = MIMEMultipart()
+            message["From"] = ALIAS_EMAIL  # Use the alias email here
+            message["To"] = "admin@saeuietpu.in"
+            message["Subject"] = subject
+
+            # Attach the HTML body
+            message.attach(MIMEText(html_body, "html"))
+
+            # Connect to the SMTP server
+            server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
+            server.starttls()  # Secure the connection
+            server.login(PRIMARY_EMAIL, EMAIL_PASSWORD)  # Authenticate with the primary email
+            server.sendmail(ALIAS_EMAIL, "admin@saeuietpu.in", message.as_string())
+
+            # Close the connection
+            server.quit()
+
+            print(f"Email sent successfully to {receiver_name} from {ALIAS_EMAIL}")
 
     except Exception as e:
         print(f"Error sending email: {e}")
@@ -184,6 +232,15 @@ async def add_sub(request: addSub, x_api_key: str = Header(...)):
     data[0]["email"].append(f'{request.submail}')
     database["subscribers"].update_one({}, {"$set":{"email": data[0]["email"]}})
     return {"status_code":200, "data": data}
+
+@app.post("/feedback")
+async def add_sub(request: addFeedback, x_api_key: str = Header(...)):
+    verify_api_key(x_api_key)
+    dbase = client["SAEWebsite"]
+    collect = dbase["feedback"]
+    collect.insert_one(request.dict())
+    send_feedback_mail(request.username, request.message )
+    return {"status_code":200, "message": "Feedback recorded"}
 
 @app.get("/")
 async def root():
