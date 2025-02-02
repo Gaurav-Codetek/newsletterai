@@ -2,7 +2,6 @@ from fastapi import FastAPI, HTTPException, Header, Query
 from typing import Optional, List
 import smtplib
 import random
-from langchain.vectorstores import FAISS
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from pydantic import BaseModel
