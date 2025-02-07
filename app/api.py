@@ -47,6 +47,8 @@ class dataReq(BaseModel):
 
 class dataStore(BaseModel):
     title: str
+    category: str
+    date: str
     content: list
     tag: str
 class emailParams(BaseModel):
