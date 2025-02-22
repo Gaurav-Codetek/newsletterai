@@ -36,7 +36,7 @@ origins = [
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -90,7 +90,7 @@ SMTP_SERVER = "smtp.gmail.com"  # GoDaddy Professional Email (Microsoft 365)
 SMTP_PORT = 587
 PRIMARY_EMAIL = os.getenv("PRIMARY_EMAIL")  # e.g., admin@saeuietpu.in
 EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD")  # Password for admin@saeuietpu.in
-ALIAS_EMAIL = "feedback@saeuietpu.in"
+ALIAS_EMAIL = "gp43883@gmail.com"
 
 
 def send_email_with_alias(receiver_email, link, title, des):
@@ -222,7 +222,7 @@ async def get_data(
 @app.post("/sendEmail")
 async def send_email(request: emailParams,x_api_key: str = Header(...)):
     verify_api_key(x_api_key)
-    result = list(database[f"{request.subs}"].find({}, {"_id":0}))
+    result = list(database["subscribers"].find({}, {"_id":0}))
     emails = result[0]['email']
     for doc in emails:
         send_email_with_alias(doc, request.link, request.title, request.des)
