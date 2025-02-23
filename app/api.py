@@ -1,7 +1,6 @@
-from fastapi import FastAPI, HTTPException, Header, Query
+from fastapi import FastAPI, HTTPException, Header, Query, UploadFile, File
 from typing import Optional, List
 import smtplib
-import random
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from pydantic import BaseModel
@@ -11,11 +10,14 @@ from fastapi.middleware.cors import CORSMiddleware
 import requests
 from bs4 import BeautifulSoup
 import os
+import csv  # For reading CSV files
+from fastapi.responses import JSONResponse
+import io
 load_dotenv()
 app = FastAPI()
 
 # environment variables-------
-uri = os.getenv("URI");
+uri = os.getenv("URI")
 API_KEY = os.getenv("API_KEY")
 
 # Database Configurations ---------
@@ -27,11 +29,12 @@ collection = database[col]
 
 
 origins = [
-    "http://localhost:3000",
-    "http://localhost:3001",
-    "https://techblog.saeuietpu.in",
-    "https://newsletter-ai.saeuietpu.in",
-    "https://saeuietpu.in"
+    # "http://localhost:3000",
+    # "http://localhost:3001",
+    # "https://techblog.saeuietpu.in",
+    # "https://newsletter-ai.saeuietpu.in",
+    # "https://saeuietpu.in"
+    "*"
 ]
 
 app.add_middleware(
@@ -99,18 +102,31 @@ def send_email_with_alias(receiver_email, link, title, des):
         subject = "Your Newsletter"
         html_body = f"""
         <html>
-            <body>
-            <div style="text-align:center; width:100%; display:flex; justify-content:center">
-                <div style="width:100%;text-align:center; align-items:center">
-                    <h2 style="text-align:center; font-weight:600;">NewsletterAI</h2>
-                    <p>An AI generated accurate & informative newsletter</p>
-                    <br>
-                    <a href={link}><h3>{title}</h3></a>
-                    <p>{des}</p>
-                    <br>
-                    <p style="font-size:12px;color:gray;">If you did not subscribe, please ignore this email.</p>
+            <body style="margin: 0; padding: 0; font-family: Arial, sans-serif; background-color: #f4f4f4;">
+                <div style="max-width: 600px; margin: auto; background: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0px 4px 10px rgba(0,0,0,0.1);">
+                    
+                    <!-- Header Section -->
+                    <h2 style="text-align: center; color: #333; font-weight: 700; font-size: 24px;">📰 NewsletterAI</h2>
+                    <p style="text-align: center; font-size: 14px; color: #555;">An AI-generated accurate & informative newsletter</p>
+
+                    <hr style="border: 0; height: 1px; background: #ddd; margin: 20px 0;">
+
+                    <!-- Main Content Section -->
+                    <div style="text-align: center;">
+                        <a href="{link}" style="text-decoration: none; color: #007BFF;">
+                            <h3 style="margin: 10px 0; color: #007BFF; font-size: 20px; text-decoration: underline;">{title}</h3>
+                        </a>
+                        <p style="font-size: 16px; color: #333; line-height: 1.6; padding: 0 15px;">{des}</p>
+                    </div>
+
+                    <hr style="border: 0; height: 1px; background: #ddd; margin: 20px 0;">
+
+                    <!-- Footer Section -->
+                    <div style="text-align: center; font-size: 12px; color: gray;">
+                        <p>If you did not subscribe, please ignore this email.</p>
+                        <p style="font-size: 10px;">You received this email because you signed up for the AI-powered newsletter. <br>If you'd like to unsubscribe, click <a href="#" style="color: #007BFF;">here</a>.</p>
+                    </div>
                 </div>
-            </div>
             </body>
         </html>
         """
@@ -245,6 +261,38 @@ async def add_sub(request: addFeedback, x_api_key: str = Header(...)):
     send_feedback_mail(request.username, request.message )
     return {"status_code":200, "message": "Feedback recorded"}
 
+csvEmails = []  # Global list to store emails
+
+@app.post("/upload-csv")
+async def upload_csv(csvFile: UploadFile = File(...)):
+    """Extract emails from uploaded CSV file."""
+    global csvEmails  # Declare global to modify the list
+    
+    try:
+        contents = await csvFile.read()
+        decoded_content = contents.decode("utf-8").splitlines()
+        csv_reader = csv.reader(decoded_content)
+
+        # Extract emails, skipping header and empty values
+        csvEmails = [row[1].strip() for row in csv_reader if len(row) > 1 and row[1].strip() and "@" in row[1]]
+        return {"message": "CSV processed successfully!", "emailss": csvEmails}
+    
+    except Exception as e:
+        return {"error": f"Failed to process CSV: {str(e)}"}
+
+
+@app.post("/send-emails/csv")
+async def send_emails_from_csv(request: emailParams,x_api_key: str = Header(...)):
+    verify_api_key(x_api_key)
+    result = list(database["subscribers"].find({}, {"_id":0}))
+    emails =csvEmails
+    print(csvEmails)
+    for doc in emails:
+        send_email_with_alias(doc, request.link, request.title, request.des)
+    return {"status":"Email sent successfully", "data": result[0]['email']}
+
+
 @app.get("/")
 async def root():
     return "Server working fine!!"
+
