@@ -15,7 +15,7 @@ load_dotenv()
 app = FastAPI()
 
 # environment variables-------
-uri = os.getenv("URI");
+uri = os.getenv("URI")
 API_KEY = os.getenv("API_KEY")
 
 # Database Configurations ---------
@@ -244,6 +244,21 @@ async def add_sub(request: addFeedback, x_api_key: str = Header(...)):
     collect.insert_one(request.dict())
     send_feedback_mail(request.username, request.message )
     return {"status_code":200, "message": "Feedback recorded"}
+
+
+class userAuth(BaseModel):
+    username: str
+    password: str
+
+@app.post("/auth")
+async def authenticate(request: userAuth, x_api_key: str = Header(...)):
+    verify_api_key(x_api_key)
+    result = database["userprofile"].find_one({"username": request.username, "password": request.password}, {"_id":0})
+
+    if not result:
+        raise HTTPException(status_code = 404, detail="invalid credentials")
+    
+    return {"message": "good credentials", "status":200}
 
 @app.get("/")
 async def root():
