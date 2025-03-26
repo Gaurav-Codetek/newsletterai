@@ -96,23 +96,43 @@ ALIAS_EMAIL = "newsletter@saeuietpu.in"
 def send_email_with_alias(receiver_email, link, title, des):
     try:
         # Email Content
-        subject = "Your Newsletter"
+        subject = f"{title}"
         html_body = f"""
-        <html>
-            <body>
-            <div style="text-align:center; width:100%; display:flex; justify-content:center">
-                <div style="width:100%;text-align:center; align-items:center">
-                    <h2 style="text-align:center; font-weight:600;">NewsletterAI</h2>
-                    <p>An AI generated accurate & informative newsletter</p>
-                    <br>
-                    <a href={link}><h3>{title}</h3></a>
-                    <p>{des}</p>
-                    <br>
-                    <p style="font-size:12px;color:gray;">If you did not subscribe, please ignore this email.</p>
-                </div>
-            </div>
-            </body>
-        </html>
+        <!DOCTYPE html>
+<html lang="en" style="font-family: Arial, sans-serif;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The PICO Digest</title>
+</head>
+<body style="margin: 0; padding: 0; background-color: #f4f4f4; font-family: Arial, sans-serif;">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #f4f4f4;">
+        <tr>
+            <td align="center" style="padding: 20px 0;">
+                <table border="0" cellpadding="0" cellspacing="0" width="600" style="background-color: white; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); overflow: hidden;">
+                    <tr>
+                        <td style="background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%); color: white; text-align: center; padding: 30px 20px;">
+                            <h2 style="margin: 0; font-size: 28px; font-weight: 700;">NewsletterAI</h2>
+                            <p style="margin: 10px 0 0; opacity: 0.9;">Intelligent Insights Delivered</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 30px 20px;">
+                            <a href="{link}" style="color: #2575fc; text-decoration: none; font-size: 22px; font-weight: 600; display: block; margin-bottom: 15px;">{title}</a>
+                            <p style="color: #333; margin-bottom: 20px; line-height: 1.6;">{des}</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #f4f4f4; color: #777; text-align: center; padding: 15px; font-size: 12px;">
+                            If you did not subscribe, please ignore this email.
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
         """
 
         # Set up the email message
