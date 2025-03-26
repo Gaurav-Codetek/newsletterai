@@ -90,7 +90,7 @@ SMTP_SERVER = "smtp.gmail.com"  # GoDaddy Professional Email (Microsoft 365)
 SMTP_PORT = 587
 PRIMARY_EMAIL = os.getenv("PRIMARY_EMAIL")  # e.g., admin@saeuietpu.in
 EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD")  # Password for admin@saeuietpu.in
-ALIAS_EMAIL = "gp43883@gmail.com"
+ALIAS_EMAIL = "newsletter@saeuietpu.in"
 
 
 def send_email_with_alias(receiver_email, link, title, des):
