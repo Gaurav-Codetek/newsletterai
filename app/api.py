@@ -117,7 +117,7 @@ def send_email_with_alias(receiver_email, link, title, des):
 
         # Set up the email message
         message = MIMEMultipart()
-        message["From"] = ALIAS_EMAIL  # Use the alias email here
+        message["From"] = f"The PICO Digest <{ALIAS_EMAIL}>"  # Use the alias email here
         message["To"] = receiver_email
         message["Subject"] = subject
 
