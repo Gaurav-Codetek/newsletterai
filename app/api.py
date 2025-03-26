@@ -86,7 +86,7 @@ def verify_api_key(api_key: str):
     if api_key != API_KEY:
         raise HTTPException(status_code=403, detail="Not authorized request")
 
-SMTP_SERVER = "smtp.gmail.com"  # GoDaddy Professional Email (Microsoft 365)
+SMTP_SERVER = "smtpout.secureserver.net"  # GoDaddy Professional Email (Microsoft 365)
 SMTP_PORT = 587
 PRIMARY_EMAIL = os.getenv("PRIMARY_EMAIL")  # e.g., admin@saeuietpu.in
 EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD")  # Password for admin@saeuietpu.in
