@@ -112,7 +112,7 @@ def send_email_with_alias(receiver_email, link, title, des):
                 <table border="0" cellpadding="0" cellspacing="0" width="600" style="background-color: white; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); overflow: hidden;">
                     <tr>
                         <td style="background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%); color: white; text-align: center; padding: 30px 20px;">
-                            <h2 style="margin: 0; font-size: 28px; font-weight: 700;">NewsletterAI</h2>
+                            <h2 style="margin: 0; font-size: 28px; font-weight: 700;">The PICO Digest</h2>
                             <p style="margin: 10px 0 0; opacity: 0.9;">Intelligent Insights Delivered</p>
                         </td>
                     </tr>
