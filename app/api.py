@@ -58,7 +58,7 @@ class emailParams(BaseModel):
     subs: str
 
 class mailerParams(BaseModel):
-    recepient: list
+    recipient: list
     subject: str
     body: str
 
