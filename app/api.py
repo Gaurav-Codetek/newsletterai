@@ -57,6 +57,11 @@ class emailParams(BaseModel):
     des: str
     subs: str
 
+class mailerParams(BaseModel):
+    recepient: list
+    subject: str
+    body: str
+
 class addFeedback(BaseModel):
     username: str
     email: str
@@ -138,6 +143,34 @@ def send_email_with_alias(receiver_email, link, title, des):
         # Set up the email message
         message = MIMEMultipart()
         message["From"] = f"The PICO Digest <{ALIAS_EMAIL}>"  # Use the alias email here
+        message["To"] = receiver_email
+        message["Subject"] = subject
+
+        # Attach the HTML body
+        message.attach(MIMEText(html_body, "html"))
+
+        # Connect to the SMTP server
+        server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
+        server.starttls()  # Secure the connection
+        server.login(PRIMARY_EMAIL, EMAIL_PASSWORD)  # Authenticate with the primary email
+        server.sendmail(ALIAS_EMAIL, receiver_email, message.as_string())
+
+        # Close the connection
+        server.quit()
+
+        print(f"Email sent successfully to {receiver_email} from {ALIAS_EMAIL}")
+    except Exception as e:
+        print(f"Error sending email: {e}")
+
+def send_sae_mailer(receiver_email, subject, body):
+    try:
+        # Email Content
+        subject = f"{subject}"
+        html_body = f"{body}"
+
+        # Set up the email message
+        message = MIMEMultipart()
+        message["From"] = f"SAE UIET PU <{ALIAS_EMAIL}>"  # Use the alias email here
         message["To"] = receiver_email
         message["Subject"] = subject
 
@@ -247,6 +280,15 @@ async def send_email(request: emailParams,x_api_key: str = Header(...)):
     for doc in emails:
         send_email_with_alias(doc, request.link, request.title, request.des)
     return {"status":"Email sent successfully", "data": result[0]['email']}
+
+@app.post("/sendSaeMailer")
+async def send_email(request: mailerParams,x_api_key: str = Header(...)):
+    verify_api_key(x_api_key)
+    emails = request.recepient
+    for doc in emails:
+        send_sae_mailer(doc, request.subject, request.body)
+    return {"status":"Email sent successfully"}
+
 
 @app.post("/addSub")
 async def add_sub(request: addSub, x_api_key: str = Header(...)):
