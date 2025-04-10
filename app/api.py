@@ -292,7 +292,7 @@ async def send_email(request: emailParams,x_api_key: str = Header(...)):
 
 @app.post("/sendSaeMailer")
 async def send_email(
-    recipient: str = Form(...),
+    recipient: list = Form(...),
     subject: str = Form(...),
     body: str = Form(...),
     isHtml: bool = Form(...),
