@@ -1,9 +1,10 @@
-from fastapi import FastAPI, HTTPException, Header, Query
+from fastapi import FastAPI, HTTPException, Header, Query, Form, UploadFile, File
 from typing import Optional, List
 import smtplib
 import random
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from email.mime.application import MIMEApplication
 from pydantic import BaseModel
 from pymongo import MongoClient
 from dotenv import load_dotenv
@@ -61,6 +62,7 @@ class mailerParams(BaseModel):
     recipient: list
     subject: str
     body: str
+    attach: list
 
 class addFeedback(BaseModel):
     username: str
@@ -162,7 +164,7 @@ def send_email_with_alias(receiver_email, link, title, des):
     except Exception as e:
         print(f"Error sending email: {e}")
 
-def send_sae_mailer(receiver_email, subject, body):
+def send_sae_mailer(receiver_email, subject, body, attachments=None):
     try:
         # Email Content
         subject = f"{subject}"
@@ -170,22 +172,29 @@ def send_sae_mailer(receiver_email, subject, body):
 
         # Set up the email message
         message = MIMEMultipart()
-        message["From"] = f"SAE UIET PU <{ALIAS_EMAIL}>"  # Use the alias email here
+        message["From"] = f"SAE UIET PU <{ALIAS_EMAIL}>"
         message["To"] = receiver_email
         message["Subject"] = subject
 
         # Attach the HTML body
         message.attach(MIMEText(html_body, "html"))
 
+        # Attach files if any
+        if attachments:
+            for filepath in attachments:
+                with open(filepath, "rb") as f:
+                    file_name = os.path.basename(filepath)
+                    part = MIMEApplication(f.read(), Name=file_name)
+                    part['Content-Disposition'] = f'attachment; filename="{file_name}"'
+                    message.attach(part)
+
         # Connect to the SMTP server
         server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
-        server.starttls()  # Secure the connection
-        server.login(PRIMARY_EMAIL, EMAIL_PASSWORD)  # Authenticate with the primary email
+        server.starttls()
+        server.login(PRIMARY_EMAIL, EMAIL_PASSWORD)
         server.sendmail(ALIAS_EMAIL, receiver_email, message.as_string())
 
-        # Close the connection
         server.quit()
-
         print(f"Email sent successfully to {receiver_email} from {ALIAS_EMAIL}")
     except Exception as e:
         print(f"Error sending email: {e}")
@@ -282,12 +291,24 @@ async def send_email(request: emailParams,x_api_key: str = Header(...)):
     return {"status":"Email sent successfully", "data": result[0]['email']}
 
 @app.post("/sendSaeMailer")
-async def send_email(request: mailerParams,x_api_key: str = Header(...)):
+async def send_email(
+    recipient: str = Form(...),
+    subject: str = Form(...),
+    body: str = Form(...),
+    isHtml: bool = Form(...),
+    attach: List[UploadFile] = File(default=[]),
+    x_api_key: str = Header(...)
+):
     verify_api_key(x_api_key)
-    emails = request.recipient
+
+    # Convert recipient JSON string back to list
+    emails = json.loads(recipient)
+
     for doc in emails:
-        send_sae_mailer(doc, request.subject, request.body)
-    return {"status":"Email sent successfully"}
+        # Do something with attachments if needed
+        send_sae_mailer(doc, subject, body, attach)
+
+    return {"status": "Email sent successfully"}
 
 
 @app.post("/addSub")
