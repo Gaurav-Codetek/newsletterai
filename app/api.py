@@ -284,7 +284,7 @@ async def send_email(request: emailParams,x_api_key: str = Header(...)):
 @app.post("/sendSaeMailer")
 async def send_email(request: mailerParams,x_api_key: str = Header(...)):
     verify_api_key(x_api_key)
-    emails = request.recepient
+    emails = request.recipient
     for doc in emails:
         send_sae_mailer(doc, request.subject, request.body)
     return {"status":"Email sent successfully"}
