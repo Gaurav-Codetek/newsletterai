@@ -327,7 +327,7 @@ async def send_email(request: mailerParams,x_api_key: str = Header(...)):
 @app.post("/addSub")
 async def add_sub(request: addSub, x_api_key: str = Header(...)):
     verify_api_key(x_api_key)
-    data = list(database["subscribers"].find({}, {"_id":0}))
+    data = list(database["testsubs"].find({}, {"_id":0}))
     data[0]["email"].append(f'{request.submail}')
     database["subscribers"].update_one({}, {"$set":{"email": data[0]["email"]}})
     return {"status_code":200, "data": data}
