@@ -79,7 +79,7 @@ class ContentBlock(BaseModel):
     cta: Optional[ButtonData] = None
     table: Optional[TableData] = None
 
-class DataStore(BaseModel):
+class dataStore(BaseModel):
     title: str
     category: str
     date: str
