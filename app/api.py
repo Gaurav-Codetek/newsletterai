@@ -309,7 +309,7 @@ async def get_data(
 @app.post("/sendEmail")
 async def send_email(request: emailParams,x_api_key: str = Header(...)):
     verify_api_key(x_api_key)
-    result = list(database["testsubs"].find({}, {"_id":0}))
+    result = list(database["subscribers"].find({}, {"_id":0}))
     emails = result[0]['email']
     for doc in emails:
         send_email_with_alias(doc, request.link, request.title, request.des)
