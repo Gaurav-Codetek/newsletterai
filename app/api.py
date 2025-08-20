@@ -83,7 +83,6 @@ class dataStore(BaseModel):
     title: str
     category: str
     date: str
-    tag: str
     content: Optional[List[ContentBlock]] = []
     
 class emailParams(BaseModel):
