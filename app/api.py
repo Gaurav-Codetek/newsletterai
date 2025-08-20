@@ -42,15 +42,50 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+class forumData(BaseModel):
+    id: str
+    username: str
+    timestamp: str
+    authenticity: str
+    twitterLink: str
+    content: str
+
 class dataReq(BaseModel):
     url: str
 
-class dataStore(BaseModel):
+class ImageData(BaseModel):
+    url: str
+    alt: Optional[str] = None
+    caption: Optional[str] = None
+
+class VideoData(BaseModel):
+    url: str
+    embed_url: Optional[str] = None
+
+class ButtonData(BaseModel):
+    text: str
+    link: Optional[str] = None
+    target: Optional[str] = "_self"
+
+class TableData(BaseModel):
+    headers: Optional[List[str]] = []
+    rows: Optional[List[List[str]]] = []
+
+class ContentBlock(BaseModel):
+    subtitle: Optional[str] = None
+    paragraph: Optional[str] = None
+    image: Optional[ImageData] = None
+    video: Optional[VideoData] = None
+    cta: Optional[ButtonData] = None
+    table: Optional[TableData] = None
+
+class DataStore(BaseModel):
     title: str
     category: str
     date: str
-    content: list
     tag: str
+    content: Optional[List[ContentBlock]] = []
+    
 class emailParams(BaseModel):
     title: str
     link: str
@@ -322,6 +357,24 @@ async def authenticate(request: userAuth, x_api_key: str = Header(...)):
     
     return {"message": "good credentials", "status":200}
 
+
+@app.post("/forum-addition")
+async def add_forum(request: forumData, x_api_key: str = Header(...)):
+    verify_api_key(x_api_key)
+    dbase = client["FORUM"]
+    collect = dbase["BharatForum"]
+    collect.insert_one(request.dict())
+    return {"status_code":200, "message": "Forum data recorded"}
+
+@app.get("/forum")
+async def get_All_forum(x_api_key: str = Header(...)):
+    verify_api_key(x_api_key)
+    dbase = client["FORUM"]
+    collect = dbase["BharatForum"]
+    result = list(collect.find({}, {"_id":0}))
+    return {"status_code":200, "data": result}
+
 @app.get("/")
 async def root():
     return "Server working fine!!"
+
