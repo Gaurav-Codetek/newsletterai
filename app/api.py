@@ -10,6 +10,8 @@ from dotenv import load_dotenv
 from fastapi.middleware.cors import CORSMiddleware
 import requests
 from bs4 import BeautifulSoup
+from bson import ObjectId
+from pymongo.collection import ReturnDocument
 import os
 load_dotenv()
 app = FastAPI()
@@ -102,6 +104,10 @@ class addFeedback(BaseModel):
     message: str
 class addSub(BaseModel):
     submail: str
+
+class deleteBlogRequest(BaseModel):
+    title: str
+
 def scrape_paragraph_content(url):
     try:
         # Send an HTTP GET request to the URL
@@ -372,6 +378,49 @@ async def get_All_forum(x_api_key: str = Header(...)):
     collect = dbase["BharatForum"]
     result = list(collect.find({}, {"_id":0}))
     return {"status_code":200, "data": result}
+
+@app.post("/deleteBlog")
+async def delete_blog(request: deleteBlogRequest, x_api_key: str = Header(...)):
+    verify_api_key(x_api_key)
+    try:
+        # Delete the document based on title (same as getData logic)
+        result = collection.delete_one({"title": request.title})
+        
+        if result.deleted_count == 1:
+            return {"status": "Success", "message": "Blog deleted successfully"}
+        else:
+            raise HTTPException(status_code=404, detail="Blog not found")
+            
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=f"Delete failed: {str(e)}")
+    
+@app.post("/updateBlog")
+async def update_blog(request: dataStore, x_api_key: str = Header(...)):
+    verify_api_key(x_api_key)
+    try:
+        # Prepare the update data
+        update_data = request.dict()
+        
+        # Update the document based on title and return the updated version
+        updated_doc = collection.find_one_and_update(
+            {"title": request.title},
+            {"$set": update_data},
+            return_document=ReturnDocument.AFTER,
+            projection={"_id": 0}  # Exclude _id from response
+        )
+        
+        if updated_doc:
+            return {
+                "status": "Success", 
+                "message": "Blog updated successfully", 
+                "data": updated_doc
+            }
+        else:
+            raise HTTPException(status_code=404, detail="Blog not found")
+            
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=f"Update failed: {str(e)}")
+
 
 @app.get("/")
 async def root():
