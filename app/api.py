@@ -10,7 +10,6 @@ from dotenv import load_dotenv
 from fastapi.middleware.cors import CORSMiddleware
 import requests
 from bs4 import BeautifulSoup
-from bson import ObjectId
 from pymongo.collection import ReturnDocument
 import os
 load_dotenv()
