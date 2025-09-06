@@ -413,7 +413,7 @@ async def send_email(request: bulkMailerParams,x_api_key: str = Header(...)):
     verify_api_key(x_api_key)
     emails = request.recipient
     for doc in emails:
-        send_sae_mailer(doc, request.subject)
+        send_bulk_mailer(doc, request.subject)
     return {"status":"Email sent successfully"}
 
 
