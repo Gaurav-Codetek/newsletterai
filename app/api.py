@@ -239,14 +239,14 @@ def send_bulk_mailer(receiver_email, subject):
         subject = f"{subject}"
         html_body = f"""
         <b><h3>Dear</h3></b>
-        <br>
+        
         <p>Hope this email finds you well and engaged in exciting technical projects.</p>
-        <br>
+        
         <p>We are delighted to invite your esteemed technical club to participate in Brains & Bots 2025, a National Hackathon on Robotics & Physical AI. This event represents a collaborative effort between TERAFAC and SAE UIET PU, and we believe it aligns perfectly with your club's commitment to innovation and technical excellence.</p>
-        <br>
+        
         <b><h4>Event Overview</h4></b>
         <p>Brains & Bots  is a national hackathon on Robotics & Physical AI, bringing together the brightest minds in coding and innovation. This challenge focuses on simulation-based problem solving, where participants dive into real-world inspired robotics and AI scenarios  in a fully virtual environment. Jointly organized by TERAFAC and SAE UIET PU, the hackathon provides a platform to sharpen programming skills, test logical thinking, and showcase creativity . It’s not just about competing — it’s about learning, collaborating, and creating smart, impactful solutions  — all within powerful simulation tools.</p>
-        <br>
+        
         <b><h4>Event Details</h4></b>
         <b>Date: September 26-27, 2025</b>
         <b>Venue: UIET, Panjab University Chandigarh</b>
@@ -254,12 +254,12 @@ def send_bulk_mailer(receiver_email, subject):
         <p>Prize Pool: ₹75,000</p>
         <p>Eligibility: 3rd and 4th Year students</p>
         <p>Registration:  FREE</p>
-        <br>
+        
         <b><h3>What Makes This Event Special</h3></b>
         <p>Real-World Challenges: Participants will tackle meaningful problems using cutting-edge simulation environments that test coding skills, logical thinking, and innovative approaches.</p>
         <p>National Recognition: This platform provides an opportunity to compete with some of the brightest minds from across the country and showcase your technical capabilities.</p>
         <p>Practical Impact: Teams will develop smart robotics solutions that address real-world problems and demonstrate the potential of physical AI applications.</p>
-        <br>
+        
         <b><h3>Comprehensive Benefits:</h3></b>
         <ul>
         <li>Official certificates for all participants</li>
@@ -268,7 +268,7 @@ def send_bulk_mailer(receiver_email, subject):
         <li>Direct access to internship and full-time job opportunities through our industry partnerships</li>
         <li>Pre-Placement Offer (PPO) internship opportunities with leading technology companies</li>
         </ul>
-        <br>
+        
         
         <b><h3>Why Your Club's Participation Matters</h3></b>
         <p>We have consistently heard impressive things about your club's technical projects and the innovative mindset of your members. This hackathon would provide an ideal platform for your team to:</p>
@@ -282,7 +282,7 @@ def send_bulk_mailer(receiver_email, subject):
         <li>Access exclusive PPO internship opportunities that could fast-track your career in robotics and AI</li>
         </ul>
         
-        <br>
+        
         
         """
 
