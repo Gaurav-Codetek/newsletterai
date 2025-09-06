@@ -46,25 +46,25 @@ app.add_middleware(
 )
 
 
-CSV_URL = "https://saeuietpu.s3.us-east-1.amazonaws.com/clubs.csv"
+# CSV_URL = "https://saeuietpu.s3.us-east-1.amazonaws.com/clubs.csv"
 
-def load_csv_from_s3():
-    response = requests.get(CSV_URL)
-    response.raise_for_status()
-    content = response.text
-    reader = csv.DictReader(io.StringIO(content))
+# def load_csv_from_s3():
+#     response = requests.get(CSV_URL)
+#     response.raise_for_status()
+#     content = response.text
+#     reader = csv.DictReader(io.StringIO(content))
 
-    mapping = {}
-    for row in reader:
-        email = row["Email"].strip()
-        college_name = row["College Name"].strip()
-        club_name = row["Club Name"].strip()
-        if email:
-            mapping[email] = (college_name, club_name)
-    return mapping
+#     mapping = {}
+#     for row in reader:
+#         email = row["Email"].strip()
+#         college_name = row["College Name"].strip()
+#         club_name = row["Club Name"].strip()
+#         if email:
+#             mapping[email] = (college_name, club_name)
+#     return mapping
 
-# Load once at startup
-email_mapping = load_csv_from_s3()
+# # Load once at startup
+# email_mapping = load_csv_from_s3()
 
 class forumData(BaseModel):
     id: str
@@ -448,18 +448,20 @@ async def send_email(request: mailerParams,x_api_key: str = Header(...)):
         send_sae_mailer(doc, request.subject, request.body)
     return {"status":"Email sent successfully"}
 
-@app.post("/sendBulkMailer")
-async def send_email(request: bulkMailerParams, x_api_key: str = Header(...)):
-    verify_api_key(x_api_key)
-    emails = request.recipient
-    for doc in emails:
-        # Lookup college & club by email
-        college_name, club_name = email_mapping.get(doc, ("Unknown College", "Unknown Club"))
+# @app.post("/sendBulkMailer")
+# async def send_email(request: bulkMailerParams, x_api_key: str = Header(...)):
+#     verify_api_key(x_api_key)
+#     emails = request.recipient
+#     for doc in emails:
+#         # Lookup college & club by email
+#         college_name, club_name = email_mapping.get(doc, ("Unknown College", "Unknown Club"))
         
-        # Send with additional info
-        send_bulk_mailer(doc, request.subject, club_name, college_name)
+#         # Send with additional info
+#         send_bulk_mailer(doc, request.subject, club_name, college_name)
 
-    return {"status": "Email sent successfully"}
+#     return {"status": "Email sent successfully"}
+
+
 
 
 @app.post("/addSub")
