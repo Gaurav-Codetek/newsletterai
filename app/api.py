@@ -1,6 +1,7 @@
 from fastapi import FastAPI, HTTPException, Header, Query
 from typing import Optional, List
 import smtplib
+import csv
 import random
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -42,6 +43,18 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+email_mapping = {}
+
+with open("clubs.csv", newline='', encoding="utf-8") as csvfile:
+    reader = csv.DictReader(csvfile)
+    for row in reader:
+        email = row["Email"].strip()
+        college_name = row["College Name"].strip()
+        club_name = row["Club Name"].strip()
+        if email:  # Avoid empty emails
+            email_mapping[email] = (college_name, club_name)
 
 class forumData(BaseModel):
     id: str
@@ -233,12 +246,12 @@ def send_sae_mailer(receiver_email, subject, body):
     except Exception as e:
         print(f"Error sending email: {e}")
 
-def send_bulk_mailer(receiver_email, subject):
+def send_bulk_mailer(receiver_email, subject, club, college):
     try:
         # Email Content
         subject = f"{subject}"
         html_body = f"""
-        <b><h3>Dear</h3></b>
+        <b><h3>Dear {club} of {college}, </h3></b>
         
         <p>Hope this email finds you well and engaged in exciting technical projects.</p>
         
@@ -426,12 +439,17 @@ async def send_email(request: mailerParams,x_api_key: str = Header(...)):
     return {"status":"Email sent successfully"}
 
 @app.post("/sendBulkMailer")
-async def send_email(request: bulkMailerParams,x_api_key: str = Header(...)):
+async def send_email(request: bulkMailerParams, x_api_key: str = Header(...)):
     verify_api_key(x_api_key)
     emails = request.recipient
     for doc in emails:
-        send_bulk_mailer(doc, request.subject)
-    return {"status":"Email sent successfully"}
+        # Lookup college & club by email
+        college_name, club_name = email_mapping.get(doc, ("Unknown College", "Unknown Club"))
+        
+        # Send with additional info
+        send_bulk_mailer(doc, request.subject, club_name, college_name)
+
+    return {"status": "Email sent successfully"}
 
 
 @app.post("/addSub")
