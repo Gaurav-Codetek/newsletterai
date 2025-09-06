@@ -238,49 +238,67 @@ def send_bulk_mailer(receiver_email, subject):
         # Email Content
         subject = f"{subject}"
         html_body = f"""
-        <b><h3>Dear</h3></b>
-        
-        <p>Hope this email finds you well and engaged in exciting technical projects.</p>
-        
-        <p>We are delighted to invite your esteemed technical club to participate in Brains & Bots 2025, a National Hackathon on Robotics & Physical AI. This event represents a collaborative effort between TERAFAC and SAE UIET PU, and we believe it aligns perfectly with your club's commitment to innovation and technical excellence.</p>
-        
-        <b><h4>Event Overview</h4></b>
-        <p>Brains & Bots  is a national hackathon on Robotics & Physical AI, bringing together the brightest minds in coding and innovation. This challenge focuses on simulation-based problem solving, where participants dive into real-world inspired robotics and AI scenarios  in a fully virtual environment. Jointly organized by TERAFAC and SAE UIET PU, the hackathon provides a platform to sharpen programming skills, test logical thinking, and showcase creativity . It’s not just about competing — it’s about learning, collaborating, and creating smart, impactful solutions  — all within powerful simulation tools.</p>
-        
-        <b><h4>Event Details</h4></b>
-        <b>Date: September 26-27, 2025</b>
-        <b>Venue: UIET, Panjab University Chandigarh</b>
-        <p>Focus Area: Robotics & Physical AI</p>
-        <p>Prize Pool: ₹75,000</p>
-        <p>Eligibility: 3rd and 4th Year students</p>
-        <p>Registration:  FREE</p>
-        
-        <b><h3>What Makes This Event Special</h3></b>
-        <p>Real-World Challenges: Participants will tackle meaningful problems using cutting-edge simulation environments that test coding skills, logical thinking, and innovative approaches.</p>
-        <p>National Recognition: This platform provides an opportunity to compete with some of the brightest minds from across the country and showcase your technical capabilities.</p>
-        <p>Practical Impact: Teams will develop smart robotics solutions that address real-world problems and demonstrate the potential of physical AI applications.</p>
-        
-        <b><h3>Comprehensive Benefits:</h3></b>
-        <ul>
-        <li>Official certificates for all participants</li>
-        <li>Substantial cash prizes from our ₹75,000 prize pool</li>
-        <li>National-level recognition and networking opportunities</li>
-        <li>Direct access to internship and full-time job opportunities through our industry partnerships</li>
-        <li>Pre-Placement Offer (PPO) internship opportunities with leading technology companies</li>
-        </ul>
-        
-        
-        <b><h3>Why Your Club's Participation Matters</h3></b>
-        <p>We have consistently heard impressive things about your club's technical projects and the innovative mindset of your members. This hackathon would provide an ideal platform for your team to:</p>
-        <ul>
-        <li>Demonstrate the technical skills and expertise you have been developing</li>
-        <li>Transform conceptual AI and robotics ideas into working prototypes</li>
-        <li>Learn from fellow students and industry mentors while sharing your own knowledge</li>
-        <li>Experience the intensity and excitement of rapid prototype development</li>
-        <li>Build valuable connections with peers, mentors, potential future colleagues, and industry recruiters</li>
-        <li>Gain recognition for your technical abilities on a national stage</li>
-        <li>Access exclusive PPO internship opportunities that could fast-track your career in robotics and AI</li>
-        </ul>
+        Dear,
+
+Hope this email finds you well and engaged in exciting technical projects.
+
+We are delighted to invite your esteemed technical club to participate in Brains & Bots 2025, a National Hackathon on Robotics & Physical AI. This event represents a collaborative effort between TERAFAC and SAE UIET PU, and we believe it aligns perfectly with your club's commitment to innovation and technical excellence.
+
+Event Overview
+Brains & Bots  is a national hackathon on Robotics & Physical AI, bringing together the brightest minds in coding and innovation. This challenge focuses on simulation-based problem solving, where participants dive into real-world inspired robotics and AI scenarios  in a fully virtual environment. Jointly organized by TERAFAC and SAE UIET PU, the hackathon provides a platform to sharpen programming skills, test logical thinking, and showcase creativity . It’s not just about competing — it’s about learning, collaborating, and creating smart, impactful solutions  — all within powerful simulation tools .  
+
+Event Details
+Date: September 26-27, 2025
+Venue: UIET, Panjab University Chandigarh
+Focus Area: Robotics & Physical AI
+Prize Pool: ₹75,000
+Eligibility: 3rd and 4th Year students
+Registration:  FREE 
+
+What Makes This Event Special
+Real-World Challenges: Participants will tackle meaningful problems using cutting-edge simulation environments that test coding skills, logical thinking, and innovative approaches.
+National Recognition: This platform provides an opportunity to compete with some of the brightest minds from across the country and showcase your technical capabilities.
+Practical Impact: Teams will develop smart robotics solutions that address real-world problems and demonstrate the potential of physical AI applications.
+
+Comprehensive Benefits:
+- Official certificates for all participants
+- Substantial cash prizes from our ₹75,000 prize pool
+- National-level recognition and networking opportunities
+- Direct access to internship and full-time job opportunities through our industry partnerships
+- Pre-Placement Offer (PPO) internship opportunities with leading technology companies
+
+Why Your Club's Participation Matters
+We have consistently heard impressive things about your club's technical projects and the innovative mindset of your members. This hackathon would provide an ideal platform for your team to:
+- Demonstrate the technical skills and expertise you have been developing
+- Transform conceptual AI and robotics ideas into working prototypes
+- Learn from fellow students and industry mentors while sharing your own knowledge
+- Experience the intensity and excitement of rapid prototype development
+- Build valuable connections with peers, mentors, potential future colleagues, and industry recruiters
+- Gain recognition for your technical abilities on a national stage
+- Access exclusive PPO internship opportunities that could fast-track your career in robotics and AI
+
+Registration Process
+The registration process is straightforward and, most importantly, completely free of cost. We firmly believe that financial constraints should never prevent talented individuals from participating in meaningful technical challenges.
+
+Registration Link: https://www.terafac.com/hackathon-details
+
+Contact Information
+Should you have any questions about the event, registration process, or specific technical details, please do not hesitate to reach out to our organizing team:
+
+Harsh Bhati: +91 92590 61679
+Vinay Kumar: +91 81270 37412
+
+We are genuinely enthusiastic about the possibility of your club joining this event. Your participation would not only enhance the competitive spirit of the hackathon but also contribute to the overall quality of innovations we expect to see.
+
+We look forward to witnessing the creative solutions your talented team members will develop at Brains & Bots 2025.
+
+Best regards,  
+Harsh Bhati & Vinay Kumar  
+Organizing Committee  
+Brains & Bots 2025  
+TERAFAC & SAE UIET PU
+
+Building the future of Robotics & Physical AI together
         
         
         
