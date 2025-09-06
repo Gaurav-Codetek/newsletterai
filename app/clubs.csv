@@ -1,52 +1,52 @@
-﻿College Name,Club Name,,Email
-UIET PU, SAE UIET PU,, gp43883@gmail.com
-PEC Chandigarh,IEEE Student Branch,,ieee@pec.edu.in
-PEC Chandigarh,ACM Student Chapter,,acm@pec.edu.in
-Chitkara University,Robotics Club,,robotics@chitkara.edu.in
-Chandigarh University,Google Developer Students Club,,gdsc@cuchd.in
-CGC Landran,Microsoft Student Partners,,msp@cgc.edu.in
-Amity University Noida,Coding Ninjas Club,,codingninjas@amity.edu
-Bennett University,AI & Analytics Club,,aiclub@bennett.edu.in
-IIIT Allahabad,GeekHaven,,geekhaven@iiita.ac.in
-Delhi Technological University,IEEE DTU,,ieee@dtu.ac.in
-NSIT Delhi,Cybersecurity Club,,cybersec@nsit.ac.in
-IIT Bombay,Programming Club,,progclub@iitb.ac.in
-VJTI Mumbai,Electronics Club,,electronics@vjti.ac.in
-IIT Madras,Delta Force,,delta@iitm.ac.in
-Anna University,Innovation Club,,innovation@annauniv.edu
-IISc Bangalore,Machine Learning Club,,mlclub@iisc.ac.in
-PES University,Software Development Club,,sdc@pes.edu
-NIT Kurukshetra,CodeChef Campus Chapter,,codechef@nitkkr.ac.in
-Thapar Institute,Mozilla Campus Club,,mozilla@thapar.edu
-BITS Pilani,Department of Visual Media,,dvm@pilani.bits-pilani.ac.in
-IIT Kharagpur,Technology Students' Gymkhana,,tsg@iitkgp.ac.in
-IIT Roorkee,Information Management Group,,img@iitr.ac.in
-VIT Vellore,Computer Society of India,,csi@vit.ac.in
-Manipal Institute of Technology,Hackathon Club,,hackathon@manipal.edu
-IIIT Hyderabad,Felicity Technical Team,,felicity@iiit.ac.in
-Jadavpur University,JU ACM Student Chapter,,acm@jaduniv.edu.in
-IIT Kanpur,Programming Club,,pclub@iitk.ac.in
-IIT Kanpur,Systems Programming Group,,systems@iitk.ac.in
-IIT Bombay,Embedded Systems Club,,embedded@iitb.ac.in
-IIT Delhi,Computer Science Society,,css@cse.iitd.ac.in
-IIT Madras,CODE (Center for Open Digital Education),,code@iitm.ac.in
-IIT Guwahati,Kernel Programming Society,,kernel@iitg.ac.in
-NITK Surathkal,Systems Programming Club,,sysprog@nitk.edu.in
-NIT Durgapur,ISTE Student Chapter,,iste@nitdgp.ac.in
-NIT Manipur,Coding Club,,ningthoujam.jsingh@nitm.ac.in
-IIIT Bangalore,Low-Level Systems Club,,llsystems@iiitb.ac.in
-BITS Hyderabad,Embedded Systems Society,,embedded@hyderabad.bits-pilani.ac.in
-NIT Warangal,Computer Systems Club,,compsys@nitw.ac.in
-IIT Gandhinagar,Operating Systems Lab,,oslab@iitgn.ac.in
-IIT Mandi,Systems Research Group,,sysresearch@iitmandi.ac.in
-IIIT Delhi,Computer Architecture Club,,comparch@iiitd.ac.in
-NIT Trichy,Microprocessor Club,,microproc@nitt.edu
-NIT Calicut,Hardware Interfacing Club,,hardware@nitc.ac.in
-BITS Goa,Digital Systems Club,,digisys@goa.bits-pilani.ac.in
-IIIT Pune,Real-Time Systems Club,,rtsystems@iiitpune.ac.in
-DTU Delhi,Embedded Systems Society,,embedded@dtu.ac.in
-Amrita Vishwa Vidyapeetham,System Software Club,,syssoftware@amrita.edu
-SRM Institute,Kernel Development Group,,kerneldev@srmist.edu.in
-PSG Tech,Assembly Language Club,,assembly@psgtech.edu
-COEP Pune,Microcontroller Society,,microcontroller@coep.ac.in
-VNIT Nagpur,Computer Networks Lab,,compnet@vnit.ac.in
+﻿College Name,Club Name,Email
+UIET PU, SAE UIET PU, gp43883@gmail.com
+PEC Chandigarh,IEEE Student Branch,ieee@pec.edu.in
+PEC Chandigarh,ACM Student Chapter,acm@pec.edu.in
+Chitkara University,Robotics Club,robotics@chitkara.edu.in
+Chandigarh University,Google Developer Students Club,gdsc@cuchd.in
+CGC Landran,Microsoft Student Partners,msp@cgc.edu.in
+Amity University Noida,Coding Ninjas Club,codingninjas@amity.edu
+Bennett University,AI & Analytics Club,aiclub@bennett.edu.in
+IIIT Allahabad,GeekHaven,geekhaven@iiita.ac.in
+Delhi Technological University,IEEE DTU,ieee@dtu.ac.in
+NSIT Delhi,Cybersecurity Club,cybersec@nsit.ac.in
+IIT Bombay,Programming Club,progclub@iitb.ac.in
+VJTI Mumbai,Electronics Club,electronics@vjti.ac.in
+IIT Madras,Delta Force,delta@iitm.ac.in
+Anna University,Innovation Club,innovation@annauniv.edu
+IISc Bangalore,Machine Learning Club,mlclub@iisc.ac.in
+PES University,Software Development Club,sdc@pes.edu
+NIT Kurukshetra,CodeChef Campus Chapter,codechef@nitkkr.ac.in
+Thapar Institute,Mozilla Campus Club,mozilla@thapar.edu
+BITS Pilani,Department of Visual Media,dvm@pilani.bits-pilani.ac.in
+IIT Kharagpur,Technology Students' Gymkhana,tsg@iitkgp.ac.in
+IIT Roorkee,Information Management Group,img@iitr.ac.in
+VIT Vellore,Computer Society of India,csi@vit.ac.in
+Manipal Institute of Technology,Hackathon Club,hackathon@manipal.edu
+IIIT Hyderabad,Felicity Technical Team,felicity@iiit.ac.in
+Jadavpur University,JU ACM Student Chapter,acm@jaduniv.edu.in
+IIT Kanpur,Programming Club,pclub@iitk.ac.in
+IIT Kanpur,Systems Programming Group,systems@iitk.ac.in
+IIT Bombay,Embedded Systems Club,embedded@iitb.ac.in
+IIT Delhi,Computer Science Society,css@cse.iitd.ac.in
+IIT Madras,CODE (Center for Open Digital Education),code@iitm.ac.in
+IIT Guwahati,Kernel Programming Society,kernel@iitg.ac.in
+NITK Surathkal,Systems Programming Club,sysprog@nitk.edu.in
+NIT Durgapur,ISTE Student Chapter,iste@nitdgp.ac.in
+NIT Manipur,Coding Club,ningthoujam.jsingh@nitm.ac.in
+IIIT Bangalore,Low-Level Systems Club,llsystems@iiitb.ac.in
+BITS Hyderabad,Embedded Systems Society,embedded@hyderabad.bits-pilani.ac.in
+NIT Warangal,Computer Systems Club,compsys@nitw.ac.in
+IIT Gandhinagar,Operating Systems Lab,oslab@iitgn.ac.in
+IIT Mandi,Systems Research Group,sysresearch@iitmandi.ac.in
+IIIT Delhi,Computer Architecture Club,comparch@iiitd.ac.in
+NIT Trichy,Microprocessor Club,microproc@nitt.edu
+NIT Calicut,Hardware Interfacing Club,hardware@nitc.ac.in
+BITS Goa,Digital Systems Club,digisys@goa.bits-pilani.ac.in
+IIIT Pune,Real-Time Systems Club,rtsystems@iiitpune.ac.in
+DTU Delhi,Embedded Systems Society,embedded@dtu.ac.in
+Amrita Vishwa Vidyapeetham,System Software Club,syssoftware@amrita.edu
+SRM Institute,Kernel Development Group,kerneldev@srmist.edu.in
+PSG Tech,Assembly Language Club,assembly@psgtech.edu
+COEP Pune,Microcontroller Society,microcontroller@coep.ac.in
+VNIT Nagpur,Computer Networks Lab,compnet@vnit.ac.in
