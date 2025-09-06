@@ -12,6 +12,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import requests
 from bs4 import BeautifulSoup
 from pymongo.collection import ReturnDocument
+import io
 import os
 load_dotenv()
 app = FastAPI()
@@ -45,16 +46,25 @@ app.add_middleware(
 )
 
 
-email_mapping = {}
+CSV_URL = "https://saeuietpu.s3.us-east-1.amazonaws.com/clubs.csv"
 
-with open("clubs.csv", newline='', encoding="utf-8") as csvfile:
-    reader = csv.DictReader(csvfile)
+def load_csv_from_s3():
+    response = requests.get(CSV_URL)
+    response.raise_for_status()
+    content = response.text
+    reader = csv.DictReader(io.StringIO(content))
+
+    mapping = {}
     for row in reader:
         email = row["Email"].strip()
         college_name = row["College Name"].strip()
         club_name = row["Club Name"].strip()
-        if email:  # Avoid empty emails
-            email_mapping[email] = (college_name, club_name)
+        if email:
+            mapping[email] = (college_name, club_name)
+    return mapping
+
+# Load once at startup
+email_mapping = load_csv_from_s3()
 
 class forumData(BaseModel):
     id: str
